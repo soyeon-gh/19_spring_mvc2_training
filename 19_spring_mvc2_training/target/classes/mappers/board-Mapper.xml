@@ -1,52 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">	<!-- Mapper 임을 명시하기 위한 DTD 선언 -->
-  
-  
- <!-- namespace는 중복되지 않고 고유해야만 한다.-->
- 
- <mapper namespace="com.spring.mapper.BoardMapper">
- 
- <!-- 순수하게 쿼리문만 들어가는 부분 -->
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!--mapper임을 명시하기 위한 DTD 선언 -->
+
+<!-- namespace는 중복되지 않고 고유해야'만' 한다. -->
+<!-- 순수하게 쿼리문만 들어가는 부분 -->
  <!-- 오타 하나라도 들어가면 안돌아감 -->
  <!-- $는 써도 무방하나 보안때문에 #으로 쓴다 -->
  <!-- parameterType 은 써야하는게 국룰 풀패키지명까지 다 적어야함 -->
  <!-- parameterMap 은 에러남 -->
- 
- 
- 	<select id="getAllBoard" resultType="com.spring.board.dto.BoardDTO">
- 		
- 		SELECT
- 			*
- 		FROM
- 			BOARD
- 	
- 	</select>
- 	
- 	
- 	
- 	<insert id="insertBoard" parameterType="com.spring.board.dto.BoardDTO">
- 	
- 		INSERT INTO BOARD (
- 			WRITER,
- 			EMAIL,
- 			SUBJECT,
- 			PASSWORD,
- 			REG_DATE,
- 			READ_COUNT,
- 			CONTENT
- 		)
- 		
- 		VALUES(
- 			#{writer},
- 			#{email},
- 			#{subject},
- 			#{password},
- 			now(),
- 			#{readCount},
- 			#{content}
- 		)
- 		
- 	</insert>
- 	
- </mapper>
+ <!-- 쿼리문 순서는 매퍼 안에있으면 상관없음 -->
+<mapper namespace="com.spring.mapper.BoardMapper">
+
+	<select id="getAllBoard" resultType="com.spring.board.dto.BoardDTO">
+		SELECT
+				*
+		FROM
+				BOARD
+	</select>
+
+	<select id="getOneBoard" parameterType="int" resultType="com.spring.board.dto.BoardDTO">
+		SELECT
+				*
+		FROM
+				BOARD
+		WHERE
+				NUM = #{num}
+	</select>
+
+	
+	
+	<insert id="insertBoard" parameterType="com.spring.board.dto.BoardDTO">
+		INSERT INTO BOARD (
+			WRITER,
+			EMAIL,
+			SUBJECT,
+			PASSWORD,
+			REG_DATE,
+			READ_COUNT,
+			CONTENT)
+		VALUES (
+			#{writer},
+			#{email},
+			#{subject},
+			#{password},
+			now(),
+			#{readCount},
+			#{content} )
+	</insert>
+
+	<select id="validateUserCheck"  parameterType="com.spring.board.dto.BoardDTO"  resultType="com.spring.board.dto.BoardDTO">
+		SELECT
+				*
+		FROM
+				BOARD
+		WHERE
+				NUM=#{num} AND PASSWORD=#{password}
+	</select>
+	
+	
+	<update id="updateBoard" parameterType="com.spring.board.dto.BoardDTO">
+		UPDATE BOARD SET
+			SUBJECT=#{subject},
+			CONTENT=#{content}
+		WHERE
+			NUM=#{num}
+	</update>
+	
+	<update id="increaseReadCount" parameterType="int">
+		UPDATE BOARD SET
+			READ_COUNT = READ_COUNT + 1
+		WHERE
+			NUM=#{num}
+	</update>
+
+	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM
+				BOARD
+		WHERE
+				NUM = #{num}
+	</delete>
+
+</mapper>
+
+
+
+
+
