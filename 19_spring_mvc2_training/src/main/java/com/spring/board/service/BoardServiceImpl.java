@@ -30,7 +30,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.increaseReadCount(num); 
 		return boardDAO.selectOne(num);  
 	}
-
+	
+//---------------------------------------------------------------------
+	
 	@Override
 	public boolean updateBoard(BoardDTO bdto) throws Exception {
 		

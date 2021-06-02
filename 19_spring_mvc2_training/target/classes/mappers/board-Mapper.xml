@@ -11,24 +11,6 @@
  <!-- 쿼리문 순서는 매퍼 안에있으면 상관없음 -->
 <mapper namespace="com.spring.mapper.BoardMapper">
 
-	<select id="getAllBoard" resultType="com.spring.board.dto.BoardDTO">
-		SELECT
-				*
-		FROM
-				BOARD
-	</select>
-
-	<select id="getOneBoard" parameterType="int" resultType="com.spring.board.dto.BoardDTO">
-		SELECT
-				*
-		FROM
-				BOARD
-		WHERE
-				NUM = #{num}
-	</select>
-
-	
-	
 	<insert id="insertBoard" parameterType="com.spring.board.dto.BoardDTO">
 		INSERT INTO BOARD (
 			WRITER,
@@ -47,6 +29,22 @@
 			#{readCount},
 			#{content} )
 	</insert>
+	
+	<select id="getAllBoard" resultType="com.spring.board.dto.BoardDTO">
+		SELECT
+				*
+		FROM
+				BOARD
+	</select>
+
+	<select id="getOneBoard" parameterType="int" resultType="com.spring.board.dto.BoardDTO">
+		SELECT
+				*
+		FROM
+				BOARD
+		WHERE
+				NUM = #{num}
+	</select>
 
 	<select id="validateUserCheck"  parameterType="com.spring.board.dto.BoardDTO"  resultType="com.spring.board.dto.BoardDTO">
 		SELECT
@@ -57,6 +55,13 @@
 				NUM=#{num} AND PASSWORD=#{password}
 	</select>
 	
+	<update id="increaseReadCount" parameterType="int">
+		UPDATE BOARD SET
+			READ_COUNT = READ_COUNT + 1
+		WHERE
+			NUM=#{num}
+	</update>
+	
 	
 	<update id="updateBoard" parameterType="com.spring.board.dto.BoardDTO">
 		UPDATE BOARD SET
@@ -66,13 +71,7 @@
 			NUM=#{num}
 	</update>
 	
-	<update id="increaseReadCount" parameterType="int">
-		UPDATE BOARD SET
-			READ_COUNT = READ_COUNT + 1
-		WHERE
-			NUM=#{num}
-	</update>
-
+	
 	
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM

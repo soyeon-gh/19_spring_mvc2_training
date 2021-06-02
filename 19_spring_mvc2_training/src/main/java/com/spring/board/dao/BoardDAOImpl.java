@@ -11,6 +11,8 @@ import com.spring.board.dto.BoardDTO;
 @Repository // Data Access Object(데이터 접근 객체는) Repository를 명시하여야 한다.
 			// 현재 클래스를 DAO bean으로 등록시킨다.
 //dao는 매퍼랑 연결용도
+// 뷰로 넘기는건 return
+
 public class BoardDAOImpl implements BoardDAO {
 	/*
 	sqlSession.insert();
@@ -45,17 +47,17 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("com.spring.mapper.BoardMapper.validateUserCheck" , bdto);
 	}
 
-	
-	@Override
-	public void update(BoardDTO bdto) throws Exception {
-		sqlSession.update("com.spring.mapper.BoardMapper.updateBoard" , bdto);
-	}
-
 	@Override
 	public void increaseReadCount(int num) throws Exception {
 		sqlSession.update("com.spring.mapper.BoardMapper.increaseReadCount" , num);
 	}
 
+	@Override
+	public void update(BoardDTO bdto) throws Exception {
+		sqlSession.update("com.spring.mapper.BoardMapper.updateBoard" , bdto);
+	}
+
+	
 	@Override
 	public void delete(int num) throws Exception {
 
