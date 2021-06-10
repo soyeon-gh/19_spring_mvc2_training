@@ -36,7 +36,7 @@ public class BoardAdvanceController {
 	@RequestMapping(value = "/boardList")
 	public String boardList(@RequestParam(name = "onePageViewCount"  , defaultValue = "10")    int onePageViewCount,
 							@RequestParam(name = "currentPageNumber" , defaultValue = "1")     int currentPageNumber,
-							@RequestParam(name = "searchKeyword"     , defaultValue = "total") String searchKeyword,
+							@RequestParam(name = "searchKeyword"     , defaultValue = "total") String searchKeyword, // 전체/작성자/내용
 							@RequestParam(name = "searchWord"        , defaultValue = "")      String searchWord,
 							Model model) throws Exception {
 		
@@ -119,6 +119,8 @@ public class BoardAdvanceController {
 	}
 	
 	
+	// -------------------------------------------------------------------------------
+	
 	
 	@RequestMapping(value = "/boardWrite" , method = RequestMethod.GET)
 	public String boardWrite() throws Exception{
@@ -133,7 +135,7 @@ public class BoardAdvanceController {
 		return "redirect:/boardAdvance/boardList";	
 	}
 	
-	
+	// -------------------------------------------------------------------------------
 	
 	@RequestMapping(value = "/boardReplyWrite" , method = RequestMethod.GET)
 	public String boardReplyWrite(@RequestParam("num") int num , Model model) throws Exception{
@@ -149,7 +151,7 @@ public class BoardAdvanceController {
 		return "redirect:/boardAdvance/boardList";	
 	}
 	
-	
+	// -------------------------------------------------------------------------------
 	
 	@RequestMapping(value = "/boardInfo")
 	public String boardInfo(@RequestParam("num") int num , Model model) throws Exception{
@@ -161,7 +163,7 @@ public class BoardAdvanceController {
 		
 	}
 	
-	
+	// -------------------------------------------------------------------------------
 	
 	@RequestMapping(value = "/boardUpdate" , method = RequestMethod.GET)
 	public String boardUpdate(@RequestParam("num") int num  , Model model) throws Exception{
@@ -199,7 +201,7 @@ public class BoardAdvanceController {
 		
 	}
 	
-	
+	// -------------------------------------------------------------------------------
 	
 	@RequestMapping(value = "/boardDelete" , method = RequestMethod.GET)
 	public String boardDelete(@RequestParam("num") int num , Model model ) throws Exception{
@@ -237,7 +239,7 @@ public class BoardAdvanceController {
 		
 	}
 	
-	
+	// -------------------------------------------------------------------------------
 	
 	@RequestMapping(value = "/makeDummyData")
 	public String makeDummyData() throws Exception{

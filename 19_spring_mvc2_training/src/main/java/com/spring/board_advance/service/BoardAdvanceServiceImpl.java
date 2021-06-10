@@ -19,28 +19,29 @@ public class BoardAdvanceServiceImpl implements BoardAdvanceService {
 	@Inject				
 	private BoardAdvanceDAO boardDAO;
 
+	// 내용 반환
 	@Override
 	public List<BoardAdvanceDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception{
 		return boardDAO.getSearchBoard(searchInfo);
 	}
 	 
-	
+	// 하나의 게시글 조회
 	
 	@Override
 	public BoardAdvanceDTO getOneBoard(int num) throws Exception{
-		boardDAO.increaseReadCount(num);
+		boardDAO.increaseReadCount(num); // 조회수
 		return boardDAO.getOneBoard(num);
 	}
 	
 	
-	
+	// 게시글 작성
 	@Override
 	public void insertBoard(BoardAdvanceDTO bdto) throws Exception {
 		boardDAO.insertBoard(bdto);
 	}
 
 	
-	
+	// 게시글 수정
 	@Override
 	public boolean updateBoard(BoardAdvanceDTO bdto) throws Exception {
 		boolean isSuccess = false;
@@ -52,7 +53,7 @@ public class BoardAdvanceServiceImpl implements BoardAdvanceService {
 	}
 
 	
-	
+	// 게시글 삭제
 	@Override
 	public boolean deleteBoard(BoardAdvanceDTO bdto) throws Exception {
 		boolean isSuccess = false;
@@ -64,7 +65,7 @@ public class BoardAdvanceServiceImpl implements BoardAdvanceService {
 	}
 
 	
-	
+	// 더미데이타 만들기
 	@Override
 	public void makeDummyData() throws Exception {
 		
@@ -119,18 +120,18 @@ public class BoardAdvanceServiceImpl implements BoardAdvanceService {
 	}
 
 	
-	
+	// 개수 반환
 	@Override
 	public int getAllBoardCount(Map<String, String> searchCountInfo) throws Exception {
 		return boardDAO.getAllBoardCount(searchCountInfo);
 	}
 
 	
-	
+	// 댓글 작성
 	@Override
 	public void insertReplyBoard(BoardAdvanceDTO bdto) throws Exception {
-		boardDAO.updateBoardReplyStep(bdto);
-		boardDAO.insertReplyBoard(bdto);
+		boardDAO.updateBoardReplyStep(bdto);       // 댓글 업뎃(수정)
+		boardDAO.insertReplyBoard(bdto);			// 댓글 작성
 	}
 	
 }

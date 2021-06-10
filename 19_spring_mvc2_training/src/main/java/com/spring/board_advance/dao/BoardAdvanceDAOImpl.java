@@ -17,21 +17,25 @@ public class BoardAdvanceDAOImpl implements BoardAdvanceDAO {
 	@Inject							
 	private SqlSession session;		
 	
+	// 내용 반환
 	@Override
 	public List<BoardAdvanceDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception{
 		return session.selectList("com.spring.mapper.BoardAdvanceMapper.getSearchBoard",searchInfo);
 	}
 	
+	// 개수 반환
 	@Override
 	public int getAllBoardCount(Map<String, String> searchCountInfo) throws Exception {
 		return session.selectOne("com.spring.mapper.BoardAdvanceMapper.getAllBoardCount" , searchCountInfo);
 	}
 	
+	// 하나의 개시글 조회
 	@Override
 	public BoardAdvanceDTO getOneBoard(int num) throws Exception{
 		return session.selectOne("com.spring.mapper.BoardAdvanceMapper.getOneBoard",num);
 	}
 	
+	// 조회수 
 	@Override
 	public void increaseReadCount(int num) throws Exception {
 		session.update("com.spring.mapper.BoardAdvanceMapper.increaseReadCount",num);
